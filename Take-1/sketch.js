@@ -7,9 +7,9 @@ function setup() {
 function draw() {
     background(200)
 
-    for (let i=0; i<20; i++) {
+    for (let i=0; i<R.randNum(5,20); i++) {
         noFill()
-        strokeWeight(R.randNum(.1,.5))
+        strokeWeight(R.randNum(.01,.3))
         beginShape()
         vertex(860*M, 20*M)
         wiggle(800*M, 90*M, 700*M, 130*M)
@@ -33,7 +33,7 @@ function draw() {
 }
 
 function wiggle(cx, cy, px, py) {
-    let cRange = 20
+    let cRange = 10
     let pRange = 5
     cx += R.randNum(-cRange,cRange)
     cy += R.randNum(-cRange,cRange)
