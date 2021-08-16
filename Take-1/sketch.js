@@ -8,7 +8,7 @@ function draw() {
     background(200)
 
     noFill()
-    strokeWeight(4)
+    strokeWeight(5)
     beginShape()
     vertex(760*M, 120*M)
     quadraticVertex(700*M, 190*M, 600*M, 230*M)
