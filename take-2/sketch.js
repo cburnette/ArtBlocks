@@ -30,8 +30,26 @@ function draw() {
         curveVertexWiggle(200*M,200*M)
         curveVertexWiggle(200*M,200*M)
         endShape()
+    }  
+
+    downstroke(200*M,200*M,180*M,750*M)
+}
+
+function downstroke(x1,y1,x2,y2) {
+    noFill();
+
+    for (let i=0; i<R.randNum(1000,1600); i++) {
+        strokeWeight(R.randNum(0.2,0.8));
+        stroke(34,100,R.randNum(45,55),R.randNum(0.1,2))
+        x1p = x1 + R.randNum(0,100)
+        x2p = x2 + R.randNum(0,100)
+        y1p = y1 + R.randNum(-10,20)
+        y2p = y2 + R.randNum(-10,20)
+        beginShape();
+        vertex(x1p, y1p);
+        quadraticVertex(x1p-(R.randNum(0.3,0.7)*(x1p-x2p)), y1-(R.randNum(0.3,0.7)*(y1-y2)), x2p, y2p);
+        endShape();
     }
-    
 }
 
 function curveVertexWiggle(px, py) {
