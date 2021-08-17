@@ -5,11 +5,13 @@ function setup() {
 }
 
 function draw() {
-    background(200)
+    noFill()
+    colorMode(HSL)
+    background(31,100,92)
 
-    for (let i=0; i<R.randNum(5,20); i++) {
-        noFill()
-        strokeWeight(R.randNum(.01,.3))
+    for (let i=0; i<R.randNum(2,10); i++) {
+        strokeWeight(R.randNum(.01,.6))
+        stroke(R.randNum(10,50))
         beginShape()
         vertex(860*M, 20*M)
         wiggle(800*M, 90*M, 700*M, 130*M)
