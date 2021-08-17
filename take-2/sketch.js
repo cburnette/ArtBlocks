@@ -38,11 +38,11 @@ function draw() {
 function downstroke(x1,y1,x2,y2) {
     noFill();
 
-    for (let i=0; i<R.randNum(1000,1600); i++) {
-        strokeWeight(R.randNum(0.2,1));
-        stroke(34,100,R.randNum(45,55),R.randNum(0.1,2))
+    for (let i=0; i<R.randNum(1300,1900); i++) {
+        strokeWeight(R.randNum(0.2,1.2));
+        stroke(34,100,R.randNum(45,55),R.randNum(0.1,0.8))
         x1p = x1 + R.randNum(0,100)
-        x2p = x2 + (R.randNum(0.5,1.05)*(x1p-x1)) //x2 + R.randNum(0,100)
+        x2p = x2 + (R.randNum(0.7,1.05)*(x1p-x1)) //x2 + R.randNum(0,100)
         y1p = y1 + R.randNum(-10,20)
         y2p = y2 + R.randNum(-10,20)
         beginShape();
