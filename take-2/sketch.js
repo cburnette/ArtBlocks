@@ -52,11 +52,11 @@ function charcoolLine() {
 
     let steps = 30000
     for (let i = 0; i <= steps; i++) {
-        let blah = i/steps
-        stroke(0,0,0,R.randNum(0.2,0.7-((blah)*0.2)))
-        strokeWeight(R.randNum(0.03,0.15-((blah)*0.14)))
-
         let t = i / steps
+        
+        stroke(0,0,0,R.randNum(0.2,0.7-((t)*0.2)))
+        strokeWeight(R.randNum(0.03,0.15-((t)*0.14)))
+        
         let x = curvePoint(...xPoints(curve1), t)
         let y = curvePoint(...yPoints(curve1), t)
         let tx = curveTangent(...xPoints(curve1), t)
