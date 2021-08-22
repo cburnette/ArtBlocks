@@ -12,7 +12,7 @@ function draw() {
     blobShape()
     tangentCurve()
     downstrokeCurve()
-    charcoolLine(50,100, 80, 800)
+    charcoolLine()
 }
 
 function downstrokeCurve() {
@@ -27,8 +27,8 @@ function downstrokeCurve() {
     let steps = 6
     for (let i = 0; i <= steps; i++) {
         let t = i / steps
-        let x = curvePoint(700, 730, 600, 700, t)
-        let y = curvePoint(100, 400, 500, 700, t)
+        let x = curvePoint(700*M, 730*M, 600*M, 700*M, t)
+        let y = curvePoint(100*M, 400*M, 500*M, 700*M, t)
         downstroke(x,y,x,y+300, 15, 200)
     }
 }
@@ -43,11 +43,35 @@ function curveVertexFromPoints(curve, doubleStartAndEnd=true) {
     endShape()
 }
 
-function charcoolLine(x1,y1,x2,y2) {
-    stroke(0,0,0,1)
+function charcoolLine() {
     noFill()
 
-    line(x1,y1,x2,y2)
+    let curve1 = [150*M,150*M,50*M,150*M,100*M,900*M,250*M,900*M]
+
+    //curve(...curve1)
+
+    let steps = 30000
+    for (let i = 0; i <= steps; i++) {
+        let blah = i/steps
+        stroke(0,0,0,R.randNum(0.2,0.7-((blah)*0.2)))
+        strokeWeight(R.randNum(0.03,0.15-((blah)*0.14)))
+
+        let t = i / steps
+        let x = curvePoint(...xPoints(curve1), t)
+        let y = curvePoint(...yPoints(curve1), t)
+        let tx = curveTangent(...xPoints(curve1), t)
+        let ty = curveTangent(...yPoints(curve1), t)
+        let a = atan2(ty, tx)
+        let b = atan2(ty, tx)
+        a -= PI / 2.0
+        b += PI / 2.0
+        let x1 = cos(a) * 8 + x
+        let y1 = sin(a) * 8 + y
+        let x2 = cos(b) * 8 + x
+        let y2 = sin(b) * 8 + y
+
+        curve(x1+R.randNum(-50,50),y1+R.randNum(-10,10),x1+R.randNum(-5,5),y1+R.randNum(-5,5),x2+R.randNum(-5,5),y2+R.randNum(-5,5),x2+R.randNum(-50,50),y2+R.randNum(-10,10))
+    }
 }
 
 function tangentCurve() {
