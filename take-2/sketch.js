@@ -65,10 +65,10 @@ function charcoolLine() {
         let b = atan2(ty, tx)
         a -= PI / 2.0
         b += PI / 2.0
-        let x1 = cos(a) * 8 + x
-        let y1 = sin(a) * 8 + y
-        let x2 = cos(b) * 8 + x
-        let y2 = sin(b) * 8 + y
+        let x1 = cos(a) * 3 + x
+        let y1 = sin(a) * 3 + y
+        let x2 = cos(b) * 3 + x
+        let y2 = sin(b) * 3 + y
 
         curve(x1+R.randNum(-50,50),y1+R.randNum(-10,10),x1+R.randNum(-5,5),y1+R.randNum(-5,5),x2+R.randNum(-5,5),y2+R.randNum(-5,5),x2+R.randNum(-50,50),y2+R.randNum(-10,10))
     }
