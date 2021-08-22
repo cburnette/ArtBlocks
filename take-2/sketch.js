@@ -46,7 +46,7 @@ function curveVertexFromPoints(curve, doubleStartAndEnd=true) {
 function charcoolLine() {
     noFill()
 
-    let curve1 = [150*M,150*M,50*M,150*M,100*M,900*M,250*M,900*M]
+    let curve1 = [150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M]
 
     //curve(...curve1)
 
