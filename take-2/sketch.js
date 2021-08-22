@@ -9,6 +9,43 @@ function draw() {
     colorMode(HSL)
     background(31,100,92)
 
+    blobShape()
+    tangentCurve()
+    downstrokeCurve()
+}
+
+function downstrokeCurve() {
+    beginShape()
+    curveVertex(700,100)
+    curveVertex(700,100)
+    curveVertex(730,400)
+    curveVertex(600,500)
+    curveVertex(700,700)
+    curveVertex(700,700)
+    endShape()
+
+    ellipseMode(CENTER)
+    
+    let steps = 6
+    for (let i = 0; i <= steps; i++) {
+        let t = i / steps
+        let x = curvePoint(700, 730, 600, 700, t)
+        let y = curvePoint(100, 400, 500, 700, t)
+        //ellipse(x, y, 15, 15)
+        downstroke(x,y,x,y+300, 15, 200)
+    }
+}
+
+function tangentCurve() {
+    strokeWeight(0.7)
+    stroke(0,0,0,1)
+    noFill()
+    curveTightness(0.0)
+    curve(200*M,100*M,800*M,100*M,850*M,600*M,850*M,600*M)
+    curve(850*M,600*M,850*M,600*M,850*M,900*M,450*M,900*M)
+}
+
+function blobShape() {
     fill(31,10,92, 0.3)
     for (let i=0; i<R.randNum(1,3); i++) {
         strokeWeight(R.randNum(.2,.6))
@@ -35,33 +72,6 @@ function draw() {
 
     downstroke(200*M,200*M,180*M,760*M, 100, 34)
     downstroke(280*M,190*M,250*M,780*M, 100, 34)
-
-    strokeWeight(0.7)
-    stroke(0,0,0,1)
-    noFill()
-    curveTightness(0.0)
-    curve(200*M,100*M,800*M,100*M,850*M,600*M,850*M,600*M)
-    curve(850*M,600*M,850*M,600*M,850*M,900*M,450*M,900*M)
-
-    beginShape()
-    curveVertex(700,100)
-    curveVertex(700,100)
-    curveVertex(730,400)
-    curveVertex(600,500)
-    curveVertex(700,700)
-    curveVertex(700,700)
-    endShape()
-
-    ellipseMode(CENTER)
-    
-    let steps = 6
-    for (let i = 0; i <= steps; i++) {
-        let t = i / steps
-        let x = curvePoint(700, 730, 600, 700, t)
-        let y = curvePoint(100, 400, 500, 700, t)
-        //ellipse(x, y, 15, 15)
-        downstroke(x,y,x,y+300, 15, 200)
-    }
 }
 
 // Foundation stuff from here down
