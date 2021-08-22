@@ -12,17 +12,15 @@ function draw() {
     blobShape()
     tangentCurve()
     downstrokeCurve()
+    charcoolLine(50,100, 80, 800)
 }
 
 function downstrokeCurve() {
-    beginShape()
-    curveVertex(700,100)
-    curveVertex(700,100)
-    curveVertex(730,400)
-    curveVertex(600,500)
-    curveVertex(700,700)
-    curveVertex(700,700)
-    endShape()
+    stroke(0,0,0,1)
+    noFill()
+
+    let curve = [700*M,100*M,730*M,400*M,600*M,500*M,700*M,700*M]
+    curveVertexFromPoints(curve)
 
     ellipseMode(CENTER)
     
@@ -31,18 +29,48 @@ function downstrokeCurve() {
         let t = i / steps
         let x = curvePoint(700, 730, 600, 700, t)
         let y = curvePoint(100, 400, 500, 700, t)
-        //ellipse(x, y, 15, 15)
         downstroke(x,y,x,y+300, 15, 200)
     }
 }
 
+function curveVertexFromPoints(curve, doubleStartAndEnd=true) {
+    beginShape()
+    if (doubleStartAndEnd) curveVertex(curve[0], curve[1])
+    for (let i=0; i<curve.length; i+=2) {
+        curveVertex(curve[i], curve[i+1])
+    }
+    if (doubleStartAndEnd) curveVertex(curve[curve.length-2], curve[curve.length-1])
+    endShape()
+}
+
+function charcoolLine(x1,y1,x2,y2) {
+    stroke(0,0,0,1)
+    noFill()
+
+    line(x1,y1,x2,y2)
+}
+
 function tangentCurve() {
+    let curve1 = [200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M]
+
     strokeWeight(0.7)
     stroke(0,0,0,1)
     noFill()
     curveTightness(0.0)
-    curve(200*M,100*M,800*M,100*M,850*M,600*M,850*M,600*M)
-    curve(850*M,600*M,850*M,600*M,850*M,900*M,450*M,900*M)
+    curve(...curve1)
+
+    let steps = 10;
+    for (let i = 0; i <= steps; i++) {
+        let t = i / steps;
+        let x = curvePoint(...xPoints(curve1), t);
+        let y = curvePoint(...yPoints(curve1), t);
+        let tx = curveTangent(...xPoints(curve1), t);
+        let ty = curveTangent(...yPoints(curve1), t);
+        let a = atan2(ty, tx);
+        a += PI / 2.0; //change this to -= to reverse direction
+        line(x, y, cos(a) * 8 + x, sin(a) * 8 + y);
+        downstroke(x,y,cos(a) * R.randNum(190,210) + x, sin(a) * R.randNum(180,220) + y,70,215)
+    }
 }
 
 function blobShape() {
@@ -75,6 +103,22 @@ function blobShape() {
 }
 
 // Foundation stuff from here down
+
+function xPoints(points) {
+    let result = []
+    for (let i=0; i<points.length; i+=2) {
+        result.push(points[i])
+    }
+    return result
+}
+
+function yPoints(points) {
+    let result = []
+    for (let i=1; i<points.length; i+=2) {
+        result.push(points[i])
+    }
+    return result
+}
 
 function downstroke(x1,y1,x2,y2, maxWidth, hue) {
     noFill();
