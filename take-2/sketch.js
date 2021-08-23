@@ -50,27 +50,30 @@ function charcoolLine() {
 
     //curve(...curve1)
 
-    let steps = 30000
+    let steps = 13000
     for (let i = 0; i <= steps; i++) {
         let t = i / steps
         
-        stroke(0,0,0,R.randNum(0.2,0.7-((t)*0.2)))
-        strokeWeight(R.randNum(0.03,0.15-((t)*0.14)))
-        
-        let x = curvePoint(...xPoints(curve1), t)
-        let y = curvePoint(...yPoints(curve1), t)
-        let tx = curveTangent(...xPoints(curve1), t)
-        let ty = curveTangent(...yPoints(curve1), t)
-        let a = atan2(ty, tx)
-        let b = atan2(ty, tx)
-        a -= PI / 2.0
-        b += PI / 2.0
-        let x1 = cos(a) * 3 + x
-        let y1 = sin(a) * 3 + y
-        let x2 = cos(b) * 3 + x
-        let y2 = sin(b) * 3 + y
+        let numLines = R.randNum(1,3)
+        for (let j=0; j<numLines; j++) {
+            stroke(0,0,0,R.randNum(0.2,0.7-((t)*0.2)))
+            strokeWeight(R.randNum(0.03,0.15-((t)*0.14)))
+            
+            let x = curvePoint(...xPoints(curve1), t)
+            let y = curvePoint(...yPoints(curve1), t)
+            let tx = curveTangent(...xPoints(curve1), t)
+            let ty = curveTangent(...yPoints(curve1), t)
+            let a = atan2(ty, tx)
+            let b = atan2(ty, tx)
+            a -= PI / 2.0
+            b += PI / 2.0
+            let x1 = cos(a) * 3 + x
+            let y1 = sin(a) * 3 + y
+            let x2 = cos(b) * 3 + x
+            let y2 = sin(b) * 3 + y
 
-        curve(x1+R.randNum(-50,50),y1+R.randNum(-10,10),x1+R.randNum(-5,5),y1+R.randNum(-5,5),x2+R.randNum(-5,5),y2+R.randNum(-5,5),x2+R.randNum(-50,50),y2+R.randNum(-10,10))
+            curve(x1+R.randNum(-50,50),y1+R.randNum(-10,10),x1+R.randNum(-5,5),y1+R.randNum(-5,5),x2+R.randNum(-5,5),y2+R.randNum(-5,5),x2+R.randNum(-50,50),y2+R.randNum(-10,10))
+        }
     }
 }
 
