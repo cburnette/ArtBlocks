@@ -12,8 +12,8 @@ function draw() {
     blobShape()
     tangentCurve()
     downstrokeCurve()
-    charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M])
-    charcoolLine([0*M,850*M,80*M,900*M,900*M,800*M,1000*M,400*M])
+    charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M], color(0, 0, 0))
+    charcoolLine([0*M,850*M,80*M,900*M,900*M,800*M,1000*M,400*M], color(46, 44, 40))
 }
 
 function downstrokeCurve() {
@@ -44,7 +44,7 @@ function curveVertexFromPoints(curve, doubleStartAndEnd=true) {
     endShape()
 }
 
-function charcoolLine(theCurve, density=18, width=5) {
+function charcoolLine(theCurve, strokeColor, density=18, width=5) {
     noFill()
 
     let distance = dist(theCurve[2], theCurve[3], theCurve[4], theCurve[5])
@@ -55,7 +55,7 @@ function charcoolLine(theCurve, density=18, width=5) {
         
         let numLines = R.randNum(1,3)
         for (let j=0; j<numLines; j++) {
-            stroke(0,0,0,R.randNum(0.2,0.7-((t)*0.2)))
+            stroke(hue(strokeColor),saturation(strokeColor),lightness(strokeColor),R.randNum(0.2,0.7-((t)*0.2)))
             strokeWeight(R.randNum(0.03,0.15-((t)*0.14)))
             
             let x = curvePoint(...xPoints(theCurve), t)
