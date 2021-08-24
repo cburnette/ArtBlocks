@@ -12,7 +12,8 @@ function draw() {
     blobShape()
     tangentCurve()
     downstrokeCurve()
-    charcoolLine()
+    charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M])
+    charcoolLine([0*M,850*M,80*M,900*M,900*M,800*M,1000*M,400*M])
 }
 
 function downstrokeCurve() {
@@ -43,14 +44,12 @@ function curveVertexFromPoints(curve, doubleStartAndEnd=true) {
     endShape()
 }
 
-function charcoolLine() {
+function charcoolLine(theCurve, density=18, width=5) {
     noFill()
 
-    let curve1 = [150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M]
+    let distance = dist(theCurve[2], theCurve[3], theCurve[4], theCurve[5])
+    let steps = distance * density
 
-    //curve(...curve1)
-
-    let steps = 13000
     for (let i = 0; i <= steps; i++) {
         let t = i / steps
         
@@ -59,10 +58,10 @@ function charcoolLine() {
             stroke(0,0,0,R.randNum(0.2,0.7-((t)*0.2)))
             strokeWeight(R.randNum(0.03,0.15-((t)*0.14)))
             
-            let x = curvePoint(...xPoints(curve1), t)
-            let y = curvePoint(...yPoints(curve1), t)
-            let tx = curveTangent(...xPoints(curve1), t)
-            let ty = curveTangent(...yPoints(curve1), t)
+            let x = curvePoint(...xPoints(theCurve), t)
+            let y = curvePoint(...yPoints(theCurve), t)
+            let tx = curveTangent(...xPoints(theCurve), t)
+            let ty = curveTangent(...yPoints(theCurve), t)
             let a = atan2(ty, tx)
             let b = atan2(ty, tx)
             a -= PI / 2.0
@@ -72,7 +71,10 @@ function charcoolLine() {
             let x2 = cos(b) * 3 + x
             let y2 = sin(b) * 3 + y
 
-            curve(x1+R.randNum(-50,50),y1+R.randNum(-10,10),x1+R.randNum(-5,5),y1+R.randNum(-5,5),x2+R.randNum(-5,5),y2+R.randNum(-5,5),x2+R.randNum(-50,50),y2+R.randNum(-10,10))
+            curve(  x1+R.randNum(-width*1.5,width*1.5), y1+R.randNum(-width*1.5,width*1.5),
+                    x1+R.randNum(-width,width), y1+R.randNum(-width,width),
+                    x2+R.randNum(-width,width), y2+R.randNum(-width,width),
+                    x2+R.randNum(-width*1.5,width*1.5), y2+R.randNum(-width*1.5,width*1.5))
         }
     }
 }
