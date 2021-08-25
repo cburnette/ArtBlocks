@@ -21,32 +21,28 @@ function draw() {
     endShape()
 }
 
-function windowResized() {
-    tempHeight = window.innerHeight
-    tempWidth = tempHeight*ratio
-    const dim = Math.min(tempWidth, tempHeight)
-    M = dim / defaultSize
-    console.log(`M: ${M}`)
-    resizeCanvas(tempWidth, tempHeight);
-}
-
 // Foundation stuff from here down
 
 class Random {
     constructor(seed) {
         this.seed = seed
+        this.originalSeed = seed
     }
-    random_dec() {
+    randDec() {
         this.seed ^= this.seed << 13
         this.seed ^= this.seed >> 17
         this.seed ^= this.seed << 5
-        return ((this.seed < 0 ? ~this.seed + 1 : this.seed) % 100000000) / 100000000
+        return ((this.seed < 0 ? ~this.seed + 1 : this.seed) % 1000) / 1000
     }
-    random_num(a, b) {
-        return a+(b-a)*this.random_dec()
+    randNum(a, b) {
+        return a+(b-a)*this.randDec()
     }
-    random_int(a, b) {
-        return Math.floor(this.random_num(a, b+1))
+    randInt(a, b) {
+        return Math.floor(this.randNum(a, b+1))
+    }
+
+    reset() {
+        this.seed = this.originalSeed
     }
 }
 
@@ -64,8 +60,18 @@ tokenData = {
     tokenId: "123000456"
 }
 
+function windowResized() {
+    tempHeight = window.innerHeight
+    tempWidth = tempHeight*ratio
+    const dim = Math.min(tempWidth, tempHeight)
+    M = dim / defaultSize
+    console.log(`M: ${M}`)
+    R.reset()
+    resizeCanvas(tempWidth, tempHeight);
+}
+
 const defaultSize = 1000
-const ratio = 1.3
+const ratio = 1
 let tempHeight = window.innerHeight
 let tempWidth = tempHeight*ratio
 let dim = Math.min(tempWidth, tempHeight)
