@@ -26,6 +26,11 @@ function draw() {
         blobShape(50,800,900,900)
     }
 
+    blendMode(BLEND)
+    for(let i=0; i<R.randNum(20,50); i++) {
+        blobShape(10,300,900,900)
+    }
+
 
     
     //tangentCurve([200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M],90,100,400,500,5,8,215)
@@ -118,7 +123,7 @@ function blobShape(minScale,maxScale,maxTranslateX,maxTranslateY) {
     let midY = R.randNum(.62*M,.82*M)
     
     for (let i=0; i<R.randNum(1,3); i++) {
-        strokeWeight(R.randNum(.0002,.001))
+        strokeWeight(R.randNum(.0003,.002))
         stroke(31,R.randNum(0,100),4)
         beginShape()
         curveTightness(R.randNum(-0.02,0.04))
