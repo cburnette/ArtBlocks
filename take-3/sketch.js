@@ -10,10 +10,10 @@ function draw() {
     background(31,100,92)
 
     blobShape()
-    tangentCurve()
+    tangentCurve([200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M],90,100,400,500,5,8,215)
     downstrokeCurve()
-    charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M], color(0, 0, 0))
-    charcoolLine([0*M,850*M,80*M,900*M,900*M,800*M,1000*M,400*M], color(46, 44, 40))
+    //charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M], color(0, 0, 0))
+    //charcoolLine([0*M,850*M,80*M,900*M,900*M,800*M,1000*M,400*M], color(46, 44, 40))
 }
 
 function downstrokeCurve() {
@@ -79,26 +79,20 @@ function charcoolLine(theCurve, strokeColor, density=18, width=5) {
     }
 }
 
-function tangentCurve() {
-    let curve1 = [200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M]
-
-    strokeWeight(0.7)
-    stroke(0,0,0,1)
+function tangentCurve(theCurve, minWidth, maxWidth, minHeight, maxHeight, minStrokes, maxStrokes, hue) {
     noFill()
-    curveTightness(0.0)
-    curve(...curve1)
 
-    let steps = 10;
+    let steps = R.randNum(minStrokes, maxStrokes)
     for (let i = 0; i <= steps; i++) {
-        let t = i / steps;
-        let x = curvePoint(...xPoints(curve1), t);
-        let y = curvePoint(...yPoints(curve1), t);
-        let tx = curveTangent(...xPoints(curve1), t);
-        let ty = curveTangent(...yPoints(curve1), t);
-        let a = atan2(ty, tx);
-        a += PI / 2.0; //change this to -= to reverse direction
-        line(x, y, cos(a) * 8 + x, sin(a) * 8 + y);
-        downstroke(x,y,cos(a) * R.randNum(190,210) + x, sin(a) * R.randNum(180,220) + y,70,215)
+        let t = i / steps
+        let x = curvePoint(...xPoints(theCurve), t)
+        let y = curvePoint(...yPoints(theCurve), t)
+        let tx = curveTangent(...xPoints(theCurve), t)
+        let ty = curveTangent(...yPoints(theCurve), t)
+        let a = atan2(ty, tx)
+        a += PI / 2.0 //change this to -= to reverse direction
+        line(x, y, cos(a) * 8 + x, sin(a) * 8 + y)
+        downstroke(x,y,cos(a) * R.randNum(minWidth*3,maxWidth*3)+ x, sin(a) * R.randNum(minHeight,maxHeight) + y,R.randNum(minWidth,maxWidth),hue)
     }
 }
 
