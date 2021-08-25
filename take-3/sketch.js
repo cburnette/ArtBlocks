@@ -9,14 +9,14 @@ function draw() {
     colorMode(HSL)
     background(31,100,92)
 
-    for(let i=0; i<40; i++) {
+    for(let i=0; i<30; i++) {
         blobShape(50,800,900,900)
     }
     
-    //tangentCurve([200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M],90,100,400,500,5,8,215)
-    //downstrokeCurve([700*M,100*M,730*M,400*M,600*M,500*M,700*M,700*M],30,50,300,400,4,7,205)
-    //charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M], color(0, 0, 0))
-    //charcoolLine([0*M,850*M,80*M,900*M,900*M,800*M,1000*M,400*M], color(46, 44, 40))
+    // tangentCurve([200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M],90,100,400,500,5,8,215)
+    // downstrokeCurve([700*M,100*M,730*M,400*M,600*M,500*M,700*M,700*M],30,50,300,400,4,7,205)
+    // charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M], color(0, 0, 0))
+    // charcoolLine([0*M,850*M,80*M,900*M,900*M,800*M,1000*M,400*M], color(46, 44, 40))
 }
 
 function downstrokeCurve(theCurve, minWidth, maxWidth, minHeight, maxHeight, minStrokes, maxStrokes, hue) {
@@ -97,27 +97,32 @@ function blobShape(minScale,maxScale,maxTranslateX,maxTranslateY) {
 
     translate(R.randNum(-maxTranslateX,maxTranslateX),R.randNum(-maxTranslateY,maxTranslateY))
     scale(R.randNum(minScale,maxScale))
+
+    let startX = R.randNum(0*M,.4*M)
+    let startY = R.randNum(0*M,.4*M)
+    let midX = R.randNum(.6*M,.8*M)
+    let midY = R.randNum(.62*M,.82*M)
     
     for (let i=0; i<R.randNum(1,3); i++) {
-        strokeWeight(R.randNum(.0005,.0015))
+        strokeWeight(R.randNum(.0002,.001))
         stroke(31,R.randNum(0,100),4)
         beginShape()
-        curveTightness(0.6)
-        curveVertexWiggle(.2*M,.2*M)
-        curveVertexWiggle(.2*M,.2*M)
-        curveVertexWiggle(.18*M,.75*M)
-        curveVertexWiggle(.5*M,.82*M)
-        curveVertexWiggle(.7*M,.72*M)
-        curveVertexWiggle(.7*M,.72*M)
+        curveTightness(R.randNum(-0.2,0.4))
+        curveVertexWiggle(startX,startY)
+        curveVertexWiggle(startX,startY)
+        curveVertexWiggle(R.randNum(.14*M,.2*M),R.randNum(.6*M,.8*M))  ///.18*M,.75*M)
+        curveVertexWiggle(R.randNum(.3*M,.65*M),R.randNum(.73*M,.88*M))  ///.5*M,.82*M)
+        curveVertexWiggle(midX,midY)
+        curveVertexWiggle(midX,midY)
         endShape()
 
         beginShape()
-        curveTightness(R.randNum(-1,1))
-        curveVertexWiggle(.7*M,.72*M)
-        curveVertexWiggle(.7*M,.72*M)
+        curveTightness(R.randNum(-.5,.5))
+        curveVertexWiggle(midX,midY)
+        curveVertexWiggle(midX,midY)
         curveVertexWiggle(.6*M,.22*M)
-        curveVertexWiggle(.2*M,.2*M)
-        curveVertexWiggle(.2*M,.2*M)
+        curveVertexWiggle(startX,startY)
+        curveVertexWiggle(startX,startY)
         endShape()
     }  
     pop()
