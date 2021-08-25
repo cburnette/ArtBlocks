@@ -9,28 +9,23 @@ function draw() {
     colorMode(HSL)
     background(31,100,92)
 
-    blobShape()
-    tangentCurve([200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M],90,100,400,500,5,8,215)
-    downstrokeCurve()
+    for(let i=0; i<40; i++) {
+        blobShape(50,800,900,900)
+    }
+    
+    //tangentCurve([200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M],90,100,400,500,5,8,215)
+    //downstrokeCurve([700*M,100*M,730*M,400*M,600*M,500*M,700*M,700*M],30,50,300,400,4,7,205)
     //charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M], color(0, 0, 0))
     //charcoolLine([0*M,850*M,80*M,900*M,900*M,800*M,1000*M,400*M], color(46, 44, 40))
 }
 
-function downstrokeCurve() {
-    stroke(0,0,0,1)
-    noFill()
-
-    let curve = [700*M,100*M,730*M,400*M,600*M,500*M,700*M,700*M]
-    curveVertexFromPoints(curve)
-
-    ellipseMode(CENTER)
-    
-    let steps = 6
+function downstrokeCurve(theCurve, minWidth, maxWidth, minHeight, maxHeight, minStrokes, maxStrokes, hue) {
+    let steps = R.randNum(minStrokes,maxStrokes)
     for (let i = 0; i <= steps; i++) {
         let t = i / steps
-        let x = curvePoint(700*M, 730*M, 600*M, 700*M, t)
-        let y = curvePoint(100*M, 400*M, 500*M, 700*M, t)
-        downstroke(x,y,x,y+300, 15, 200)
+        let x = curvePoint(...xPoints(theCurve), t)
+        let y = curvePoint(...yPoints(theCurve), t)
+        downstroke(x,y,x,y+R.randNum(minHeight,maxHeight), R.randNum(minWidth,maxWidth), hue)
     }
 }
 
@@ -96,36 +91,40 @@ function tangentCurve(theCurve, minWidth, maxWidth, minHeight, maxHeight, minStr
     }
 }
 
-function blobShape() {
+function blobShape(minScale,maxScale,maxTranslateX,maxTranslateY) {
     fill(31,10,92, 0.3)
+    push()
+
+    translate(R.randNum(-maxTranslateX,maxTranslateX),R.randNum(-maxTranslateY,maxTranslateY))
+    scale(R.randNum(minScale,maxScale))
+    
     for (let i=0; i<R.randNum(1,3); i++) {
-        strokeWeight(R.randNum(.2,.6))
+        strokeWeight(R.randNum(.0005,.0015))
         stroke(31,R.randNum(0,100),4)
         beginShape()
         curveTightness(0.6)
-        curveVertexWiggle(200*M,200*M)
-        curveVertexWiggle(200*M,200*M)
-        curveVertexWiggle(180*M,750*M)
-        curveVertexWiggle(500*M,820*M)
-        curveVertexWiggle(700*M,720*M)
-        curveVertexWiggle(700*M,720*M)
+        curveVertexWiggle(.2*M,.2*M)
+        curveVertexWiggle(.2*M,.2*M)
+        curveVertexWiggle(.18*M,.75*M)
+        curveVertexWiggle(.5*M,.82*M)
+        curveVertexWiggle(.7*M,.72*M)
+        curveVertexWiggle(.7*M,.72*M)
         endShape()
 
         beginShape()
         curveTightness(R.randNum(-1,1))
-        curveVertexWiggle(700*M,720*M)
-        curveVertexWiggle(700*M,720*M)
-        curveVertexWiggle(600*M,220*M)
-        curveVertexWiggle(200*M,200*M)
-        curveVertexWiggle(200*M,200*M)
+        curveVertexWiggle(.7*M,.72*M)
+        curveVertexWiggle(.7*M,.72*M)
+        curveVertexWiggle(.6*M,.22*M)
+        curveVertexWiggle(.2*M,.2*M)
+        curveVertexWiggle(.2*M,.2*M)
         endShape()
     }  
+    pop()
 
-    downstroke(200*M,200*M,180*M,760*M, 100, 34)
-    downstroke(280*M,190*M,250*M,780*M, 100, 34)
+    //downstroke(200*M,200*M,180*M,760*M, 100, 34)
+    //downstroke(280*M,190*M,250*M,780*M, 100, 34)
 }
-
-// Foundation stuff from here down
 
 function xPoints(points) {
     let result = []
@@ -161,11 +160,13 @@ function downstroke(x1,y1,x2,y2, maxWidth, hue) {
 }
 
 function curveVertexWiggle(px, py) {
-    let pRange = R.randNum(5,10)
+    let pRange = R.randNum(.005,.01)
     px += R.randNum(-pRange,pRange)
     py += R.randNum(-pRange,pRange)
     return curveVertex(px,py)
 }
+
+// Foundation stuff from here down
 
 class Random {
     constructor(seed) {
