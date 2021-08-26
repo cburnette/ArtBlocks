@@ -23,7 +23,7 @@ function draw() {
         blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),50,800,1,1)
     }
 
-    blendMode(BLEND) //subract only works in 3D
+    blendMode(BLEND)
     for(let i=0; i<R.randNum(10,40); i++) {
         blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),50,800,1,1)
     }
@@ -53,8 +53,8 @@ function blobShape(startX,startY,midX,midY,minScale,maxScale,maxTranslateX,maxTr
     scale(R.randNum(minScale,maxScale))
     
     for (let i=0; i<R.randNum(1,3); i++) {
-        strokeWeight(R.randNum(.001,.008))
-        stroke(31,R.randNum(0,100),4, R.randNum(0.3,0.8))
+        strokeWeight(R.randNum(.0008,.008))
+        stroke(31,R.randNum(0,100),4, R.randNum(0.2,0.7))
         beginShape()
         curveTightness(R.randNum(-0.02,0.04))
         curveVertexWiggle(startX,startY)
