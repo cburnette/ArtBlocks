@@ -2,6 +2,10 @@ function setup() {
     createCanvas(tempWidth, tempHeight);
     noLoop()
     console.log(`width: ${width}, height: ${height}`)
+
+    // setInterval(() => {
+    //     draw()
+    // }, 5000);
 }
 
 function draw() {
@@ -13,22 +17,22 @@ function draw() {
 
     blendMode(BLEND)
     for(let i=0; i<R.randNum(10,40); i++) {
-        blobShape(20,600,900,900)
+        blobShape(20,600,900*M,900*M)
     }
 
     blendMode(SUBTRACT)
     for(let i=0; i<R.randNum(10,40); i++) {
-        blobShape(50,800,900,900)
+        blobShape(50,800,900*M,900*M)
     }
 
     blendMode(SCREEN)
     for(let i=0; i<100; i++) {
-        blobShape(50,800,900,900)
+        blobShape(50,800,900*M,900*M)
     }
 
     blendMode(BLEND)
     for(let i=0; i<R.randNum(20,50); i++) {
-        blobShape(10,300,900,900)
+        blobShape(10,300,900*M,900*M)
     }
 
 
@@ -123,8 +127,8 @@ function blobShape(minScale,maxScale,maxTranslateX,maxTranslateY) {
     let midY = R.randNum(.62*M,.82*M)
     
     for (let i=0; i<R.randNum(1,3); i++) {
-        strokeWeight(R.randNum(.0003,.002))
-        stroke(31,R.randNum(0,100),4)
+        strokeWeight(R.randNum(.0008,.005))
+        stroke(31,R.randNum(0,100),4, R.randNum(0.3,0.8))
         beginShape()
         curveTightness(R.randNum(-0.02,0.04))
         curveVertexWiggle(startX,startY)
