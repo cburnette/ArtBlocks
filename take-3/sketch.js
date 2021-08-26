@@ -20,10 +20,10 @@ function draw() {
         blobShape(20,600,900*M,900*M)
     }
 
-    blendMode(SUBTRACT)
-    for(let i=0; i<R.randNum(10,40); i++) {
-        blobShape(50,800,900*M,900*M)
-    }
+    // blendMode(SUBTRACT) subract only works in 3D
+    // for(let i=0; i<R.randNum(10,40); i++) {
+    //     blobShape(50,800,900*M,900*M)
+    // }
 
     blendMode(SCREEN)
     for(let i=0; i<100; i++) {
