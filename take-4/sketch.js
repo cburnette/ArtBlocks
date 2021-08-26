@@ -11,37 +11,71 @@ function setup() {
 function draw() {
     noFill()
     colorMode(HSL)
-    background(31,100,92)
+    background(31,100,92, R.randNum(0.9,1))
 
     blendMode(BLEND)
     for(let i=0; i<R.randNum(10,40); i++) {
-        blobShape(20,600,width,height)
+        blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),20,600,1,1)
     }
 
     blendMode(SCREEN)
     for(let i=0; i<30; i++) {
-        blobShape(50,800,width,height)
+        blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),50,800,1,1)
     }
 
     blendMode(BLEND) //subract only works in 3D
     for(let i=0; i<R.randNum(10,40); i++) {
-        blobShape(50,800,width,height)
+        blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),50,800,1,1)
     }
 
     blendMode(OVERLAY)
     for(let i=0; i<R.randNum(20,50); i++) {
-        blobShape(10,300,width,height)
+        blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),10,300,1,1)
     }
 
     blendMode(SCREEN)
     for(let i=0; i<20; i++) {
-        blobShape(400,800,width,height)
+        blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),400,800,1,1)
     }
+
+    blendMode(BLEND)
     
     //tangentCurve([200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M],90,100,400,500,5,8,215)
     //downstrokeCurve([700*M,100*M,730*M,400*M,600*M,500*M,700*M,700*M],30,50,300,400,4,7,205)
-    //charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M], color(0, 0, 0))
+    //charcoolLine([150*M,150*M,50*M,150*M,100*M,900*M,450*M,900*M], color(0, 0, 0), 12, 2)
     //charcoolLine([0*M,850*M,80*M,900*M,900*M,800*M,1000*M,400*M], color(46, 44, 40))
+}
+
+function blobShape(startX,startY,midX,midY,minScale,maxScale,maxTranslateX,maxTranslateY) {
+    push()
+    fill(R.randNum(10,200),R.randNum(20,100),R.randNum(30,70), R.randNum(.1,.4))
+    translate(R.randNum(-maxTranslateX,maxTranslateX)*width,R.randNum(-maxTranslateY,maxTranslateY)*height)
+    scale(R.randNum(minScale,maxScale))
+    
+    for (let i=0; i<R.randNum(1,3); i++) {
+        strokeWeight(R.randNum(.001,.008))
+        stroke(31,R.randNum(0,100),4, R.randNum(0.3,0.8))
+        beginShape()
+        curveTightness(R.randNum(-0.02,0.04))
+        curveVertexWiggle(startX,startY)
+        curveVertexWiggle(startX,startY)
+        curveVertexWiggle(R.randNum(.14,.2),R.randNum(.6,.8))  
+        curveVertexWiggle(R.randNum(.3,.65),R.randNum(.73,.88))
+        curveVertexWiggle(midX,midY)
+        curveVertexWiggle(midX,midY)
+        endShape()
+
+        beginShape()
+        curveTightness(R.randNum(-.03,.04))
+        curveVertexWiggle(midX,midY)
+        curveVertexWiggle(midX,midY)
+        curveVertexWiggle(.6,.22)
+        curveVertexWiggle(startX,startY)
+        curveVertexWiggle(startX,startY)
+        endShape()
+    }  
+
+    pop()
 }
 
 function downstrokeCurve(theCurve, minWidth, maxWidth, minHeight, maxHeight, minStrokes, maxStrokes, hue) {
@@ -116,43 +150,33 @@ function tangentCurve(theCurve, minWidth, maxWidth, minHeight, maxHeight, minStr
     }
 }
 
-function blobShape(minScale,maxScale,maxTranslateX,maxTranslateY) {
-    push()
-    fill(R.randNum(20,210),R.randNum(50,80),52, R.randNum(.1,.4))
-    translate(R.randNum(-maxTranslateX,maxTranslateX),R.randNum(-maxTranslateY,maxTranslateY))
-    scale(R.randNum(minScale,maxScale))
+function oneIn(number) {
+    let blah = R.randInt(1,number+1)
+    return blah == 1
+}
 
-    let startX = R.randNum(0,.4)
-    let startY = R.randNum(0,.4)
-    let midX = R.randNum(.6,.8)
-    let midY = R.randNum(.62,.82)
-    
-    for (let i=0; i<R.randNum(1,3); i++) {
-        strokeWeight(R.randNum(.0008,.005))
-        stroke(31,R.randNum(0,100),4, R.randNum(0.3,0.8))
+function downstroke(x1,y1,x2,y2, maxWidth, hue) {
+    noFill()
+
+    for (let i=0; i<R.randNum(13*maxWidth,19*maxWidth); i++) {
+        strokeWeight(R.randNum(0.2,1.2))
+        stroke(hue,100,R.randNum(45,55),R.randNum(0.1,0.8))
+        x1p = x1 + R.randNum(0,R.randNum(maxWidth-(maxWidth*.8), maxWidth))
+        x2p = x2 + (R.randNum(0.7,1.05)*(x1p-x1)) //x2 + R.randNum(0,100)
+        y1p = y1 + R.randNum(-10,20)
+        y2p = y2 + R.randNum(-10,20)
         beginShape()
-        curveTightness(R.randNum(-0.02,0.04))
-        curveVertexWiggle(startX,startY)
-        curveVertexWiggle(startX,startY)
-        curveVertexWiggle(R.randNum(.14,.2),R.randNum(.6,.8))  
-        curveVertexWiggle(R.randNum(.3,.65),R.randNum(.73,.88))
-        curveVertexWiggle(midX,midY)
-        curveVertexWiggle(midX,midY)
+        vertex(x1p, y1p)
+        quadraticVertex(x1p-(R.randNum(0.3,0.7)*(x1p-x2p)), y1-(R.randNum(0.3,0.7)*(y1-y2)), x2p, y2p)
         endShape()
+    }
+}
 
-        beginShape()
-        curveTightness(R.randNum(-.05,.05))
-        curveVertexWiggle(midX,midY)
-        curveVertexWiggle(midX,midY)
-        curveVertexWiggle(.6,.22)
-        curveVertexWiggle(startX,startY)
-        curveVertexWiggle(startX,startY)
-        endShape()
-    }  
-    pop()
-
-    //downstroke(200*M,200*M,180*M,760*M, 100, 34)
-    //downstroke(280*M,190*M,250*M,780*M, 100, 34)
+function curveVertexWiggle(px, py) {
+    let pRange = R.randNum(.005,.01)
+    px += R.randNum(-pRange,pRange)
+    py += R.randNum(-pRange,pRange)
+    return curveVertex(px,py)
 }
 
 function xPoints(points) {
@@ -171,29 +195,6 @@ function yPoints(points) {
     return result
 }
 
-function downstroke(x1,y1,x2,y2, maxWidth, hue) {
-    noFill();
-
-    for (let i=0; i<R.randNum(13*maxWidth,19*maxWidth); i++) {
-        strokeWeight(R.randNum(0.2,1.2));
-        stroke(hue,100,R.randNum(45,55),R.randNum(0.1,0.8))
-        x1p = x1 + R.randNum(0,R.randNum(maxWidth-(maxWidth*.8), maxWidth))
-        x2p = x2 + (R.randNum(0.7,1.05)*(x1p-x1)) //x2 + R.randNum(0,100)
-        y1p = y1 + R.randNum(-10,20)
-        y2p = y2 + R.randNum(-10,20)
-        beginShape();
-        vertex(x1p, y1p);
-        quadraticVertex(x1p-(R.randNum(0.3,0.7)*(x1p-x2p)), y1-(R.randNum(0.3,0.7)*(y1-y2)), x2p, y2p);
-        endShape();
-    }
-}
-
-function curveVertexWiggle(px, py) {
-    let pRange = R.randNum(.005,.01)
-    px += R.randNum(-pRange,pRange)
-    py += R.randNum(-pRange,pRange)
-    return curveVertex(px,py)
-}
 
 // Foundation stuff from here down
 
