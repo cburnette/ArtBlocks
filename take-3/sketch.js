@@ -13,29 +13,30 @@ function draw() {
     colorMode(HSL)
     background(31,100,92)
 
-
-
     blendMode(BLEND)
     for(let i=0; i<R.randNum(10,40); i++) {
-        blobShape(20,600,900*M,900*M)
+        blobShape(20,600,width,height)
     }
-
-    // blendMode(SUBTRACT) subract only works in 3D
-    // for(let i=0; i<R.randNum(10,40); i++) {
-    //     blobShape(50,800,900*M,900*M)
-    // }
 
     blendMode(SCREEN)
-    for(let i=0; i<100; i++) {
-        blobShape(50,800,900*M,900*M)
+    for(let i=0; i<30; i++) {
+        blobShape(50,800,width,height)
     }
 
-    blendMode(BLEND)
+    blendMode(BLEND) //subract only works in 3D
+    for(let i=0; i<R.randNum(10,40); i++) {
+        blobShape(50,800,width,height)
+    }
+
+    blendMode(SCREEN)
     for(let i=0; i<R.randNum(20,50); i++) {
-        blobShape(10,300,900*M,900*M)
+        blobShape(10,300,width,height)
     }
 
-
+    blendMode(SCREEN)
+    for(let i=0; i<20; i++) {
+        blobShape(400,800,width,height)
+    }
     
     //tangentCurve([200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M],90,100,400,500,5,8,215)
     //downstrokeCurve([700*M,100*M,730*M,400*M,600*M,500*M,700*M,700*M],30,50,300,400,4,7,205)
