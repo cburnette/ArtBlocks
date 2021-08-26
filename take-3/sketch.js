@@ -28,7 +28,7 @@ function draw() {
         blobShape(50,800,width,height)
     }
 
-    blendMode(SCREEN)
+    blendMode(OVERLAY)
     for(let i=0; i<R.randNum(20,50); i++) {
         blobShape(10,300,width,height)
     }
