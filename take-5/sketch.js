@@ -3,14 +3,14 @@ function setup() {
     noLoop()
     console.log(`width: ${width}, height: ${height}`)
 
-    // setInterval(() => {
-    //     draw()
-    // }, 5000);
+    setInterval(() => {
+        draw()
+    }, 5000);
 }
 
 function draw() {
     noFill()
-    colorMode(HSL)
+    colorMode(HSB)
     background(31,100,92, R.randNum(0.9,1))
 
     blendMode(BLEND)
@@ -246,7 +246,7 @@ function windowResized() {
 }
 
 const defaultSize = 1000
-const ratio = 1
+const ratio = 1.77
 let tempHeight = window.innerHeight
 let tempWidth = tempHeight*ratio
 let dim = Math.min(tempWidth, tempHeight)
