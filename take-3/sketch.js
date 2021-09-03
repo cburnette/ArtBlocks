@@ -3,9 +3,9 @@ function setup() {
     noLoop()
     console.log(`width: ${width}, height: ${height}`)
 
-    // setInterval(() => {
-    //     draw()
-    // }, 5000);
+    setInterval(() => {
+        draw()
+    }, 5000);
 }
 
 function draw() {

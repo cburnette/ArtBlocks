@@ -2,6 +2,10 @@ function setup() {
     createCanvas(tempWidth, tempHeight);
     noLoop()
     console.log(`width: ${width}, height: ${height}`)
+
+    setInterval(() => {
+        draw()
+    }, 5000);
 }
 
 function draw() {
