@@ -3,9 +3,9 @@ function setup() {
     noLoop()
     console.log(`width: ${width}, height: ${height}`)
 
-    // setInterval(() => {
-    //     draw()
-    // }, 5000);
+    setInterval(() => {
+        draw()
+    }, 5000);
 }
 
 function draw() {
@@ -246,7 +246,7 @@ function windowResized() {
 }
 
 const defaultSize = 1000
-const ratio = 1
+const ratio = 1.77
 let tempHeight = window.innerHeight
 let tempWidth = tempHeight*ratio
 let dim = Math.min(tempWidth, tempHeight)
