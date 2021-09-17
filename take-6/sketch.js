@@ -3,9 +3,9 @@ function setup() {
     noLoop()
     console.log(`width: ${width}, height: ${height}`)
 
-    setInterval(() => {
-        draw()
-    }, 2000);
+    // setInterval(() => {
+    //     draw()
+    // }, 5000);
 }
 
 function draw() {
@@ -13,7 +13,9 @@ function draw() {
     colorMode(HSL)
     background(91,75,90)
 
-    building(900,1000,.2,.2)
+    for(let i=0; i<R.randNum(100,400); i++) {
+        building(100,800,.9,.9)
+    }
 
     // blendMode(BLEND)
     // for(let i=0; i<R.randNum(10,40); i++) {
@@ -54,13 +56,24 @@ function building(minScale,maxScale,maxTranslateX,maxTranslateY) {
     stroke(31,R.randNum(0,100),4, R.randNum(0.2,0.7))
     strokeWeight(R.randNum(.0008,.008))
     fill(R.randNum(10,200),R.randNum(40,800),R.randNum(30,70), R.randNum(.1,.4))
-    translate(R.randNum(0,maxTranslateX)*width,R.randNum(0,maxTranslateY)*height)
+    translate(R.randNum(-maxTranslateX,maxTranslateX)*width,R.randNum(-maxTranslateY,maxTranslateY)*height)
     scale(R.randNum(minScale,maxScale))
 
-    curve(.4,.01,.25,.25,.25,.75,.1,.75)
-    curve(.2,.65,.25,.75,.45,.75,.1,.75)
-    curve(.4,.65,.45,.75,.45,.25,.4,.75)
-    curve(.4,.15,.45,.25,.25,.25,.4,.25)
+    // curve(.4,.01,.25,.25,.25,.75,.1,.75)
+    // curve(.2,.65,.25,.75,.45,.75,.1,.75)
+    // curve(.4,.65,.45,.75,.45,.25,.4,.75)
+    // curve(.4,.15,.45,.25,.25,.25,.4,.25)
+
+    curveTightness(.9)
+    beginShape()
+    curveVertexWiggle(.25,.25)
+    curveVertexWiggle(.25,.25)
+    curveVertexWiggle(.25,.75)
+    curveVertexWiggle(.45,.75)
+    curveVertexWiggle(.45,.25)
+    curveVertexWiggle(.25,.25)
+    curveVertexWiggle(.25,.25)
+    endShape()
 
     pop()
 }
