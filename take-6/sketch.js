@@ -75,7 +75,7 @@ function building(minScale,maxScale,maxTranslateX,maxTranslateY) {
     curveVertexWiggle(tl.x,tl.y)
     endShape()
 
-
+    
 
     pop()
 }
