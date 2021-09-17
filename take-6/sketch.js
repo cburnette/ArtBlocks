@@ -59,21 +59,23 @@ function building(minScale,maxScale,maxTranslateX,maxTranslateY) {
     translate(R.randNum(-maxTranslateX,maxTranslateX)*width,R.randNum(-maxTranslateY,maxTranslateY)*height)
     scale(R.randNum(minScale,maxScale))
 
-    // curve(.4,.01,.25,.25,.25,.75,.1,.75)
-    // curve(.2,.65,.25,.75,.45,.75,.1,.75)
-    // curve(.4,.65,.45,.75,.45,.25,.4,.75)
-    // curve(.4,.15,.45,.25,.25,.25,.4,.25)
+    let tl = {x:.25,y:.25}
+    let bl = {x:.25,y:.75}
+    let br = {x:.45,y:.75}
+    let tr = {x:.45,y:.25}
 
     curveTightness(.9)
     beginShape()
-    curveVertexWiggle(.25,.25)
-    curveVertexWiggle(.25,.25)
-    curveVertexWiggle(.25,.75)
-    curveVertexWiggle(.45,.75)
-    curveVertexWiggle(.45,.25)
-    curveVertexWiggle(.25,.25)
-    curveVertexWiggle(.25,.25)
+    curveVertexWiggle(tl.x,tl.y)
+    curveVertexWiggle(tl.x,tl.y)
+    curveVertexWiggle(bl.x,bl.y)
+    curveVertexWiggle(br.x,br.y)
+    curveVertexWiggle(tr.x,tr.y)
+    curveVertexWiggle(tl.x,tl.y)
+    curveVertexWiggle(tl.x,tl.y)
     endShape()
+
+
 
     pop()
 }
