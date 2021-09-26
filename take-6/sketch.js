@@ -3,46 +3,44 @@ function setup() {
     noLoop()
     console.log(`width: ${width}, height: ${height}`)
 
-    // setInterval(() => {
-    //     draw()
-    // }, 5000);
+    setInterval(() => {
+        draw()
+    }, 5000);
 }
 
 function draw() {
     noFill()
     colorMode(HSL)
-    background(91,75,90)
+    background(91,75,90,R.randNum(.95,.99))
 
-    for(let i=0; i<R.randNum(100,400); i++) {
-        building(100,800,.9,.9)
+
+    blendMode(SCREEN)
+    for(let i=0; i<10; i++) {
+        building(200,900,1,1)
     }
 
-    // blendMode(BLEND)
-    // for(let i=0; i<R.randNum(10,40); i++) {
-    //     blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),20,600,1,1)
-    // }
+    blendMode(BLEND)
+    for(let i=0; i<R.randNum(10,20); i++) {
+        building(700,980,1,1)
+    }
 
-    // blendMode(SCREEN)
-    // for(let i=0; i<30; i++) {
-    //     blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),50,800,1,1)
-    // }
+    blendMode(OVERLAY)
+    for(let i=0; i<R.randNum(20,50); i++) {
+        building(100,1000,1,1)
+    }
 
-    // blendMode(BLEND)
-    // for(let i=0; i<R.randNum(10,40); i++) {
-    //     blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),50,800,1,1)
-    // }
+    blendMode(SCREEN)
+    for(let i=0; i<20; i++) {
+        building(300,900,1,1)
+    }
 
-    // blendMode(OVERLAY)
-    // for(let i=0; i<R.randNum(20,50); i++) {
-    //     blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),10,300,1,1)
-    // }
+    blendMode(BLEND)
+    for(let i=0; i<R.randNum(80,100); i++) {
+        building(700,980,1,1)
+    }
 
-    // blendMode(SCREEN)
-    // for(let i=0; i<20; i++) {
-    //     blobShape(R.randNum(0,.4),R.randNum(0,.4),R.randNum(.6,.8),R.randNum(.62,.82),400,800,1,1)
-    // }
 
-    // blendMode(BLEND)
+    blendMode(BLEND)
     
     //tangentCurve([200*M,100*M,200*M,100*M,550*M,30*M,850*M,220*M],90,100,400,500,5,8,215)
     //downstrokeCurve([700*M,100*M,730*M,400*M,600*M,500*M,700*M,700*M],30,50,300,400,4,7,205)
@@ -52,12 +50,13 @@ function draw() {
 
 function building(minScale,maxScale,maxTranslateX,maxTranslateY) {
     push()
+
+    translate(R.randNum(-maxTranslateX,maxTranslateX)*width,R.randNum(-maxTranslateY,maxTranslateY)*height)
+    scale(R.randNum(minScale,maxScale))
     
     stroke(31,R.randNum(0,100),4, R.randNum(0.2,0.7))
     strokeWeight(R.randNum(.0008,.008))
     fill(R.randNum(10,200),R.randNum(40,800),R.randNum(30,70), R.randNum(.1,.4))
-    translate(R.randNum(-maxTranslateX,maxTranslateX)*width,R.randNum(-maxTranslateY,maxTranslateY)*height)
-    scale(R.randNum(minScale,maxScale))
 
     let tl = {x:.25,y:.25}
     let bl = {x:.25,y:.75}
@@ -75,6 +74,27 @@ function building(minScale,maxScale,maxTranslateX,maxTranslateY) {
     curveVertexWiggle(tl.x,tl.y)
     endShape()
 
+    for (let i=0; i<3; i++) {
+        for (let j=0; j<3; j++) {
+            stroke(31,R.randNum(0,100),4, R.randNum(0.2,0.7))
+            strokeWeight(R.randNum(.0008,.008))
+            fill(R.randNum(10,200),R.randNum(40,800),R.randNum(30,70), R.randNum(.01,.28))
+
+            let tenPercentX = ((tr.x-tl.x)*(.1+(.2*i)))+tl.x
+            let tenPercentY = ((bl.y-tl.y)*(.1+(.2*j)))+tl.y
+            curveTightness(.97)
+            strokeWeight(R.randNum(.0008,.002))
+            beginShape()
+            curveVertexWiggle(tenPercentX,tenPercentY)
+            curveVertexWiggle(tenPercentX,tenPercentY)
+            curveVertexWiggle(tenPercentX,tenPercentY+.05)
+            curveVertexWiggle(tenPercentX+.02,tenPercentY+.05)
+            curveVertexWiggle(tenPercentX+.02,tenPercentY)
+            curveVertexWiggle(tenPercentX,tenPercentY)
+            curveVertexWiggle(tenPercentX,tenPercentY)
+            endShape()
+        }
+    }
     
 
     pop()
